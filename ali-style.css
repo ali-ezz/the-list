@@ -1,0 +1,123 @@
+/* Global resets and font styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f9fb;
+    color: #333;
+    line-height: 1.8; /* Increase line-height for better readability */
+    margin: 0;
+    direction: rtl; /* Ensure RTL for Arabic text */
+}
+
+header.header-section {
+    background-color: #e3e6e9;
+    text-align: center;
+    padding: 2rem 1rem; /* Slightly bigger spacing */
+    margin-bottom: 1.5rem;
+}
+
+header.header-section .main-title {
+    font-size: 2.6rem; /* Increased size for better visibility */
+    color: #0d6efd;
+    margin-bottom: 0;
+}
+
+main.content-container {
+    width: 90%;
+    max-width: 1000px; /* Slightly bigger max width for large screens */
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+/* Each section block */
+section.content-section {
+    background-color: rgb(255, 255, 255);
+    margin: 1.5rem 0;
+    padding: 2rem; /* Increased internal spacing */
+    border-radius: 10px;
+    border: 2px solid #b6b6b6; /* Added black border */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* Section Titles */
+section.content-section .section-title {
+    font-size: 1.6rem; /* Increased section title size */
+    color: #0d6efd;
+    margin-bottom: 1rem;
+}
+
+/* Paragraph Text */
+section.content-section .section-text {
+    color: #555;
+    font-size: 1.125rem; /* Slightly bigger than 1rem */
+    line-height: 1.8;
+}
+
+/* Image placeholders and boxes, centered */
+.grades-box,
+.student-level-box,
+.cumulative-gpa-box,
+.graduation-requirements-box,
+.table-container,
+.image-placeholder {
+    display: flex;
+    justify-content: center;
+    margin: 1.5rem 0;
+}
+.outside-img,
+.grades-box img,
+.student-level-box img,
+.cumulative-gpa-box img,
+.graduation-requirements-box img,
+.table-container img,
+.image-placeholder img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #000; /* Added black border */
+}
+
+/* Responsive adjustments for tablets and mobile devices */
+@media (max-width: 992px) { /* Tablet breakpoint */
+    main.content-container {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    section.content-section {
+        margin: 1rem 0;
+        padding: 1.5rem;
+    }
+
+    section.content-section .section-title {
+        font-size: 1.4rem;
+    }
+
+    section.content-section .section-text {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) { /* Mobile breakpoint */
+    header.header-section .main-title {
+        font-size: 2rem;
+    }
+
+    section.content-section {
+        margin: 0.75rem 0;
+        padding: 1rem;
+    }
+
+    section.content-section .section-title {
+        font-size: 1.2rem;
+    }
+
+    section.content-section .section-text {
+        font-size: 0.95rem;
+    }
+}
