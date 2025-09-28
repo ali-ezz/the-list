@@ -18,6 +18,37 @@
   <!-- Container for all sections -->
   <main class="content-container">
 
+    <!-- CGPA Calculator Section -->
+    <section class="content-section" id="cgpa-section">
+      <h2 class="in section-title">حاسبة المعدل التراكمي (CGPA)</h2>
+      <p class="out section-text">أدخل الساعات المعتمدة ونسبة المقرر (أو الدرجة المئوية)، ثم اضغط "احسب المعدل". يمكنك إضافة أو حذف المقررات حسب الحاجة.</p>
+
+      <div class="cgpa-controls" style="margin:1rem 0;">
+        <button id="add-course" type="button">أضف مقرر</button>
+        <button id="calc-cgpa" type="button">احسب المعدل</button>
+        <button id="clear-courses" type="button">مسح</button>
+      </div>
+
+      <div style="overflow:auto;">
+        <table id="cgpa-courses" style="width:100%;border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th>الساعات المعتمدة</th>
+              <th>النسبة (%)</th>
+              <th>نقطة المقرر</th>
+              <th>إجراء</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:1rem;">
+        <div>النتيجة (CGPA): <strong id="cgpa-result">-</strong></div>
+        <div id="cgpa-detail" style="margin-top:0.5rem;color:#555;"></div>
+      </div>
+    </section>
+
     <!-- مادة (1) -->
     <section class="content-section">
       <h2 class="in section-title">مادة (١): الدرجة العلمية</h2>
@@ -362,36 +393,6 @@
       </p>
     </section>
 
-    <!-- CGPA Calculator Section -->
-    <section class="content-section" id="cgpa-section">
-      <h2 class="in section-title">حاسبة المعدل التراكمي (CGPA)</h2>
-      <p class="out section-text">أدخل الساعات المعتمدة ونسبة المقرر (أو الدرجة المئوية)، ثم اضغط "احسب المعدل". يمكنك إضافة أو حذف المقررات حسب الحاجة.</p>
-
-      <div class="cgpa-controls" style="margin:1rem 0;">
-        <button id="add-course" type="button">أضف مقرر</button>
-        <button id="calc-cgpa" type="button">احسب المعدل</button>
-        <button id="clear-courses" type="button">مسح</button>
-      </div>
-
-      <div style="overflow:auto;">
-        <table id="cgpa-courses" style="width:100%;border-collapse:collapse;">
-          <thead>
-            <tr>
-              <th>الساعات المعتمدة</th>
-              <th>النسبة (%)</th>
-              <th>نقطة المقرر</th>
-              <th>إجراء</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-
-      <div style="margin-top:1rem;">
-        <div>النتيجة (CGPA): <strong id="cgpa-result">-</strong></div>
-        <div id="cgpa-detail" style="margin-top:0.5rem;color:#555;"></div>
-      </div>
-    </section>
 
   </main>
 
