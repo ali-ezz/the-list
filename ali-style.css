@@ -520,6 +520,10 @@ section.content-section .section-text {
         padding: 0.5rem 0.4rem !important;
     }
     
+    #cgpa-courses .course-point {
+        font-size: 0.85rem !important;
+    }
+    
     #cgpa-courses .remove-course {
         font-size: 0.75rem !important;
         padding: 0.5rem 0.6rem !important;

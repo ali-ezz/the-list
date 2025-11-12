@@ -111,7 +111,7 @@ function createRow(credit = '', value = '') {
   
   const pointsTd = document.createElement('td');
   pointsTd.className = 'course-point';
-  pointsTd.style.cssText = 'padding:0.6rem 0.2rem;text-align:center;color:#1976d2;font-weight:600;font-size:0.75rem;display:none;width:70px;';
+  pointsTd.style.cssText = 'padding:0.6rem 0.2rem;text-align:center;color:#1976d2;font-weight:600;font-size:0.85rem;display:none;width:70px;';
   pointsTd.textContent = '0.000';
   
   const removeTd = document.createElement('td');
