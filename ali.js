@@ -30,6 +30,58 @@
     return 'ضعيف جداً';
   }
 
+  function getClassificationBadge(gpa) {
+    const classification = classifyCGPA(gpa);
+    let bgColor, textColor;
+    
+    if (gpa >= 3.5) {
+      bgColor = '#4caf50'; // green
+      textColor = 'white';
+    } else if (gpa >= 3.0) {
+      bgColor = '#2196f3'; // blue
+      textColor = 'white';
+    } else if (gpa >= 2.5) {
+      bgColor = '#ff9800'; // orange
+      textColor = 'white';
+    } else if (gpa >= 2.0) {
+      bgColor = '#ffc107'; // amber
+      textColor = '#333';
+    } else if (gpa >= 1.0) {
+      bgColor = '#f44336'; // red
+      textColor = 'white';
+    } else {
+      bgColor = '#9e9e9e'; // grey
+      textColor = 'white';
+    }
+    
+    return `<span style="display:inline-block;padding:0.3rem 0.8rem;background:${bgColor};color:${textColor};border-radius:20px;font-size:0.9rem;font-weight:bold;margin-right:0.5rem;">${classification}</span>`;
+  }
+
+  // Validate and sanitize numeric input (English numbers only)
+  function validateNumericInput(input, min = 0, max = null) {
+    let value = input.value;
+    
+    // Remove any non-numeric characters except decimal point
+    value = value.replace(/[^0-9.]/g, '');
+    
+    // Ensure only one decimal point
+    const parts = value.split('.');
+    if (parts.length > 2) {
+      value = parts[0] + '.' + parts.slice(1).join('');
+    }
+    
+    // Convert to number and validate range
+    let numValue = parseFloat(value);
+    if (!isNaN(numValue)) {
+      if (min !== null && numValue < min) numValue = min;
+      if (max !== null && numValue > max) numValue = max;
+      value = numValue.toString();
+    }
+    
+    input.value = value;
+    return value;
+  }
+
   // If inputValue <= 4.0 treat as grade-point directly, otherwise treat as percentage.
   function interpretInputValue(v) {
     if (v === '' || v === null || isNaN(v)) return 0;
@@ -44,12 +96,48 @@
 
   function createRow(credit = 3, value = 75) {
     const tr = document.createElement('tr');
+    tr.style.borderBottom = '1px solid #e3f2fd';
+    tr.style.transition = 'background-color 0.2s';
+    tr.style.background = 'white';
     tr.innerHTML = `
-      <td><input class="course-credit" type="number" min="0" step="0.5" value="${credit}" /></td>
-      <td><input class="course-value" type="number" min="0" max="100" step="0.1" value="${value}" /></td>
-      <td class="course-point">-</td>
-      <td><button type="button" class="remove-course">حذف</button></td>
+      <td style="padding:0.8rem;text-align:center;"><input class="course-credit" type="text" inputmode="decimal" value="${credit}" style="width:90%;padding:0.5rem;border:2px solid #bbdefb;border-radius:5px;text-align:center;font-size:0.95rem;transition:border-color 0.3s;" /></td>
+      <td style="padding:0.8rem;text-align:center;"><input class="course-value" type="text" inputmode="decimal" value="${value}" style="width:90%;padding:0.5rem;border:2px solid #bbdefb;border-radius:5px;text-align:center;font-size:0.95rem;transition:border-color 0.3s;" /></td>
+      <td class="course-point" style="padding:0.8rem;text-align:center;color:#1976d2;font-weight:600;font-size:0.95rem;">-</td>
+      <td style="padding:0.8rem;text-align:center;"><button type="button" class="remove-course" style="padding:0.4rem 0.8rem;background:#ffebee;color:#d32f2f;border:1px solid #ffcdd2;border-radius:5px;cursor:pointer;font-size:0.85rem;font-weight:500;transition:all 0.2s;">حذف</button></td>
     `;
+    
+    // Add hover effect
+    tr.addEventListener('mouseenter', function() {
+      this.style.backgroundColor = '#f5f9ff';
+    });
+    tr.addEventListener('mouseleave', function() {
+      this.style.backgroundColor = 'white';
+    });
+    
+    // Add focus styling for inputs
+    const inputs = tr.querySelectorAll('input');
+    inputs.forEach(input => {
+      input.addEventListener('focus', function() {
+        this.style.borderColor = '#2196f3';
+        this.style.boxShadow = '0 0 0 3px rgba(33,150,243,0.1)';
+      });
+      input.addEventListener('blur', function() {
+        this.style.borderColor = '#bbdefb';
+        this.style.boxShadow = 'none';
+      });
+    });
+    
+    // Add hover effect for remove button
+    const removeBtn = tr.querySelector('.remove-course');
+    removeBtn.addEventListener('mouseenter', function() {
+      this.style.backgroundColor = '#d32f2f';
+      this.style.color = 'white';
+    });
+    removeBtn.addEventListener('mouseleave', function() {
+      this.style.backgroundColor = '#ffebee';
+      this.style.color = '#d32f2f';
+    });
+    
     return tr;
   }
 
@@ -67,12 +155,30 @@
     const valueEls = Array.from(document.querySelectorAll('.course-value'));
     const pointEls = Array.from(document.querySelectorAll('.course-point'));
 
-    let sumWeighted = 0; // full-precision accumulator
-    let sumCredits = 0;
+    // Get old GPA and hours with validation
+    const oldGpaInput = document.getElementById('old-gpa');
+    const oldHoursInput = document.getElementById('old-hours');
+    
+    let oldGPA = 0;
+    let oldHours = 0;
+    
+    if (oldGpaInput && oldGpaInput.value) {
+      oldGPA = parseFloat(oldGpaInput.value.replace(/[^0-9.]/g, '')) || 0;
+      if (oldGPA > 4) oldGPA = 4;
+      if (oldGPA < 0) oldGPA = 0;
+    }
+    
+    if (oldHoursInput && oldHoursInput.value) {
+      oldHours = parseFloat(oldHoursInput.value.replace(/[^0-9.]/g, '')) || 0;
+      if (oldHours < 0) oldHours = 0;
+    }
+
+    let sumWeighted = 0; // full-precision accumulator for new courses
+    let sumCredits = 0; // new courses credits
 
     for (let i = 0; i < creditsEls.length; i++) {
-      const cr = parseFloat(creditsEls[i].value) || 0;
-      const raw = valueEls[i].value;
+      const cr = parseFloat(creditsEls[i].value.replace(/[^0-9.]/g, '')) || 0;
+      const raw = valueEls[i].value.replace(/[^0-9.]/g, '');
       const interpreted = interpretInputValue(raw);
       const pt = interpreted.point || 0;
       // show per-course point with 3 decimals
@@ -81,28 +187,55 @@
       sumCredits += cr;
     }
 
-    const resultEl = document.getElementById('cgpa-result');
-    const detailEl = document.getElementById('cgpa-detail');
+    const semesterGpaEl = document.getElementById('semester-gpa-result');
+    const semesterDetailEl = document.getElementById('semester-detail');
+    const semesterClassificationEl = document.getElementById('semester-classification');
+    const cgpaResultEl = document.getElementById('cgpa-result');
+    const cgpaDetailEl = document.getElementById('cgpa-detail');
+    const cumulativeClassificationEl = document.getElementById('cumulative-classification');
+    const cumulativeSection = document.getElementById('cumulative-section');
 
+    // Calculate semester GPA (new courses only)
     if (sumCredits === 0) {
-      resultEl.textContent = 'لا توجد ساعات معتمدة';
-      detailEl.textContent = '';
+      semesterGpaEl.textContent = 'لا توجد مواد جديدة';
+      semesterDetailEl.textContent = '';
+      semesterClassificationEl.innerHTML = '';
+      cumulativeSection.style.display = 'none';
       return;
     }
 
-    const cgpaExact = sumWeighted / sumCredits; // full precision (e.g., 3.625)
-    const cgpaTrunc2 = truncateTo(cgpaExact, 2); // university final value (no rounding up)
-    // display values: exact with 3 decimals, final CGPA truncated to 2 decimals
-    resultEl.textContent = cgpaTrunc2.toFixed(2);
-    detailEl.textContent = `دقيق: ${cgpaExact.toFixed(3)} — التصنيف: ${classifyCGPA(cgpaTrunc2)} — مجموع النقاط: ${sumWeighted.toFixed(3)} ، مجموع الساعات: ${sumCredits.toFixed(1)}`;
+    const semesterGpaExact = sumWeighted / sumCredits;
+    const semesterGpaTrunc2 = truncateTo(semesterGpaExact, 2);
+    
+    semesterGpaEl.textContent = semesterGpaTrunc2.toFixed(2);
+    semesterClassificationEl.innerHTML = getClassificationBadge(semesterGpaTrunc2);
+    semesterDetailEl.textContent = `دقيق: ${semesterGpaExact.toFixed(3)} — مجموع النقاط: ${sumWeighted.toFixed(3)} ، مجموع الساعات: ${sumCredits.toFixed(1)}`;
+
+    // Calculate cumulative GPA if old GPA and hours are provided
+    if (oldGPA > 0 && oldHours > 0) {
+      const oldWeightedPoints = oldGPA * oldHours;
+      const totalWeightedPoints = oldWeightedPoints + sumWeighted;
+      const totalHours = oldHours + sumCredits;
+      
+      const cumulativeGpaExact = totalWeightedPoints / totalHours;
+      const cumulativeGpaTrunc2 = truncateTo(cumulativeGpaExact, 2);
+      
+      cgpaResultEl.textContent = cumulativeGpaTrunc2.toFixed(2);
+      cumulativeClassificationEl.innerHTML = getClassificationBadge(cumulativeGpaTrunc2);
+      cgpaDetailEl.textContent = `دقيق: ${cumulativeGpaExact.toFixed(3)} — مجموع النقاط الكلي: ${totalWeightedPoints.toFixed(3)} ، مجموع الساعات الكلي: ${totalHours.toFixed(1)}`;
+      cumulativeSection.style.display = 'block';
+    } else {
+      cumulativeSection.style.display = 'none';
+    }
   }
 
   // Setup UI bindings after DOM ready
   document.addEventListener('DOMContentLoaded', function () {
     const tableBody = document.querySelector('#cgpa-courses tbody');
     const addBtn = document.getElementById('add-course');
-    const calcBtn = document.getElementById('calc-cgpa');
     const clearBtn = document.getElementById('clear-courses');
+    const oldGpaInput = document.getElementById('old-gpa');
+    const oldHoursInput = document.getElementById('old-hours');
 
     // add a couple default rows
     tableBody.appendChild(createRow(3, 75));
@@ -115,13 +248,62 @@
       recalc();
     });
 
-    calcBtn.addEventListener('click', function () {
-      recalc();
-    });
-
     clearBtn.addEventListener('click', function () {
       tableBody.innerHTML = '';
       recalc();
+    });
+
+    // Add listeners for old GPA and hours inputs with validation
+    if (oldGpaInput) {
+      // Add focus/blur styling
+      oldGpaInput.addEventListener('focus', function() {
+        this.style.borderColor = '#2196f3';
+        this.style.boxShadow = '0 0 0 3px rgba(33,150,243,0.1)';
+      });
+      oldGpaInput.addEventListener('blur', function() {
+        this.style.borderColor = '#bbdefb';
+        this.style.boxShadow = 'none';
+        if (this.value && parseFloat(this.value) > 4) {
+          this.value = '4';
+        }
+      });
+      oldGpaInput.addEventListener('input', function () {
+        validateNumericInput(this, 0, 4);
+        recalc();
+      });
+    }
+
+    if (oldHoursInput) {
+      // Add focus/blur styling
+      oldHoursInput.addEventListener('focus', function() {
+        this.style.borderColor = '#2196f3';
+        this.style.boxShadow = '0 0 0 3px rgba(33,150,243,0.1)';
+      });
+      oldHoursInput.addEventListener('blur', function() {
+        this.style.borderColor = '#bbdefb';
+        this.style.boxShadow = 'none';
+      });
+      oldHoursInput.addEventListener('input', function () {
+        validateNumericInput(this, 0);
+        recalc();
+      });
+    }
+
+    // Add button hover effects
+    addBtn.addEventListener('mouseenter', function() {
+      this.style.background = '#1976d2';
+    });
+    addBtn.addEventListener('mouseleave', function() {
+      this.style.background = '#2196f3';
+    });
+
+    clearBtn.addEventListener('mouseenter', function() {
+      this.style.background = '#e0e0e0';
+      this.style.borderColor = '#bdbdbd';
+    });
+    clearBtn.addEventListener('mouseleave', function() {
+      this.style.background = '#f5f5f5';
+      this.style.borderColor = '#e0e0e0';
     });
 
     function attachRowHandlers() {
@@ -131,10 +313,15 @@
         btn.addEventListener('click', onRemove);
       });
 
-      // inputs change
-      Array.from(document.querySelectorAll('.course-credit, .course-value')).forEach(inp => {
-        inp.removeEventListener('input', onInput); // safe remove
-        inp.addEventListener('input', onInput);
+      // inputs change with validation
+      Array.from(document.querySelectorAll('.course-credit')).forEach(inp => {
+        inp.removeEventListener('input', onCreditInput);
+        inp.addEventListener('input', onCreditInput);
+      });
+
+      Array.from(document.querySelectorAll('.course-value')).forEach(inp => {
+        inp.removeEventListener('input', onValueInput);
+        inp.addEventListener('input', onValueInput);
       });
     }
 
@@ -146,7 +333,13 @@
       }
     }
 
-    function onInput() {
+    function onCreditInput(e) {
+      validateNumericInput(e.target, 0);
+      recalc();
+    }
+
+    function onValueInput(e) {
+      validateNumericInput(e.target, 0);
       recalc();
     }
 
