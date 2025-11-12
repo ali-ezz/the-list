@@ -102,21 +102,21 @@ function createRow(credit = '', value = '') {
   tr.style.cssText = 'border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(227, 242, 253); transition: background-color 0.2s; background: white;';
   
   const creditTd = document.createElement('td');
-  creditTd.innerHTML = `<input class="course-credit" type="text" inputmode="decimal" value="${credit}" style="width:95%;max-width:60px;padding:0.5rem 0.4rem;border:2px solid #bbdefb;border-radius:6px;text-align:center;font-size:0.85rem;transition:border-color 0.3s;box-sizing:border-box;">`;
-  creditTd.style.cssText = 'padding:0.8rem 0.4rem;text-align:center;';
+  creditTd.innerHTML = `<input class="course-credit" type="text" inputmode="decimal" value="${credit}" style="width:95%;max-width:48px;padding:0.4rem 0.2rem;border:2px solid #bbdefb;border-radius:4px;text-align:center;font-size:0.75rem;transition:border-color 0.3s;box-sizing:border-box;">`;
+  creditTd.style.cssText = 'padding:0.6rem 0.2rem;text-align:center;';
   
   const valueTd = document.createElement('td');
-  valueTd.innerHTML = `<input class="course-value" type="text" inputmode="decimal" value="${value}" style="width:95%;max-width:90px;padding:0.5rem 0.4rem;border:2px solid #bbdefb;border-radius:6px;text-align:center;font-size:0.85rem;transition:border-color 0.3s;box-sizing:border-box;">`;
-  valueTd.style.cssText = 'padding:0.8rem 0.4rem;text-align:center;';
+  valueTd.innerHTML = `<input class="course-value" type="text" inputmode="decimal" value="${value}" style="width:95%;max-width:75px;padding:0.4rem 0.2rem;border:2px solid #bbdefb;border-radius:4px;text-align:center;font-size:0.75rem;transition:border-color 0.3s;box-sizing:border-box;">`;
+  valueTd.style.cssText = 'padding:0.6rem 0.2rem;text-align:center;';
   
   const pointsTd = document.createElement('td');
   pointsTd.className = 'course-point';
-  pointsTd.style.cssText = 'padding:0.8rem 0.4rem;text-align:center;color:#1976d2;font-weight:600;font-size:0.85rem;display:none;width:90px;';
+  pointsTd.style.cssText = 'padding:0.6rem 0.2rem;text-align:center;color:#1976d2;font-weight:600;font-size:0.75rem;display:none;width:70px;';
   pointsTd.textContent = '0.000';
   
   const removeTd = document.createElement('td');
-  removeTd.innerHTML = `<button type="button" class="remove-course" style="padding:0.5rem 0.6rem;background:#ffebee;color:#d32f2f;border:1px solid #ffcdd2;border-radius:6px;cursor:pointer;font-size:0.75rem;font-weight:500;transition:all 0.2s;white-space:nowrap;">حذف</button>`;
-  removeTd.style.cssText = 'padding:0.8rem 0.4rem;text-align:center;';
+  removeTd.innerHTML = `<button type="button" class="remove-course" style="padding:0.4rem 0.4rem;background:#ffebee;color:#d32f2f;border:1px solid #ffcdd2;border-radius:4px;cursor:pointer;font-size:0.65rem;font-weight:500;transition:all 0.2s;white-space:nowrap;">حذف</button>`;
+  removeTd.style.cssText = 'padding:0.6rem 0.2rem;text-align:center;';
   
   tr.appendChild(creditTd);
   tr.appendChild(valueTd);

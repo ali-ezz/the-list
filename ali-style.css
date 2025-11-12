@@ -500,4 +500,28 @@ section.content-section .section-text {
     .point-col-header {
         display: table-cell !important;
     }
+    
+    /* Expand table and spacing on larger devices */
+    #cgpa-courses {
+        min-width: 400px !important;
+    }
+    
+    #cgpa-courses thead th {
+        padding: 0.85rem 0.4rem !important;
+        font-size: 0.85rem !important;
+    }
+    
+    #cgpa-courses tbody td {
+        padding: 0.8rem 0.4rem !important;
+    }
+    
+    #cgpa-courses tbody td input {
+        font-size: 0.85rem !important;
+        padding: 0.5rem 0.4rem !important;
+    }
+    
+    #cgpa-courses .remove-course {
+        font-size: 0.75rem !important;
+        padding: 0.5rem 0.6rem !important;
+    }
 }
