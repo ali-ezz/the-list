@@ -97,54 +97,33 @@
     return { point: percentToPoint(num), source: 'pct' };
   }
 
-  function createRow(credit = 3, value = 75) {
-    const tr = document.createElement('tr');
-    tr.style.borderBottom = '1px solid #e3f2fd';
-    tr.style.transition = 'background-color 0.2s';
-    tr.style.background = 'white';
-    tr.innerHTML = `
-      <td style="padding:1.2rem 0.8rem;text-align:center;"><input class="course-credit" type="text" inputmode="decimal" value="${credit}" style="width:90%;padding:0.7rem;border:2px solid #bbdefb;border-radius:6px;text-align:center;font-size:0.95rem;transition:border-color 0.3s;box-sizing:border-box;" /></td>
-      <td style="padding:1.2rem 0.8rem;text-align:center;"><input class="course-value" type="text" inputmode="decimal" value="${value}" style="width:90%;padding:0.7rem;border:2px solid #bbdefb;border-radius:6px;text-align:center;font-size:0.95rem;transition:border-color 0.3s;box-sizing:border-box;" /></td>
-      <td class="course-point" style="padding:1.2rem 0.8rem;text-align:center;color:#1976d2;font-weight:600;font-size:0.95rem;">-</td>
-      <td style="padding:1.2rem 0.8rem;text-align:center;"><button type="button" class="remove-course" style="padding:0.5rem 0.9rem;background:#ffebee;color:#d32f2f;border:1px solid #ffcdd2;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;transition:all 0.2s;white-space:nowrap;">حذف</button></td>
-    `;
-    
-    // Add hover effect
-    tr.addEventListener('mouseenter', function() {
-      this.style.backgroundColor = '#f5f9ff';
-    });
-    tr.addEventListener('mouseleave', function() {
-      this.style.backgroundColor = 'white';
-    });
-    
-    // Add focus styling for inputs
-    const inputs = tr.querySelectorAll('input');
-    inputs.forEach(input => {
-      input.addEventListener('focus', function() {
-        this.style.borderColor = '#2196f3';
-        this.style.boxShadow = '0 0 0 3px rgba(33,150,243,0.1)';
-      });
-      input.addEventListener('blur', function() {
-        this.style.borderColor = '#bbdefb';
-        this.style.boxShadow = 'none';
-      });
-    });
-    
-    // Add hover effect for remove button
-    const removeBtn = tr.querySelector('.remove-course');
-    removeBtn.addEventListener('mouseenter', function() {
-      this.style.backgroundColor = '#d32f2f';
-      this.style.color = 'white';
-    });
-    removeBtn.addEventListener('mouseleave', function() {
-      this.style.backgroundColor = '#ffebee';
-      this.style.color = '#d32f2f';
-    });
-    
-    return tr;
-  }
-
-  function truncateTo(num, digits) {
+function createRow(credit = '', value = '') {
+  const tr = document.createElement('tr');
+  tr.style.cssText = 'border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(227, 242, 253); transition: background-color 0.2s; background: white;';
+  
+  const creditTd = document.createElement('td');
+  creditTd.innerHTML = `<input class="course-credit" type="text" inputmode="decimal" value="${credit}" style="width:95%;max-width:60px;padding:0.5rem 0.4rem;border:2px solid #bbdefb;border-radius:6px;text-align:center;font-size:0.85rem;transition:border-color 0.3s;box-sizing:border-box;">`;
+  creditTd.style.cssText = 'padding:0.8rem 0.4rem;text-align:center;';
+  
+  const valueTd = document.createElement('td');
+  valueTd.innerHTML = `<input class="course-value" type="text" inputmode="decimal" value="${value}" style="width:95%;max-width:90px;padding:0.5rem 0.4rem;border:2px solid #bbdefb;border-radius:6px;text-align:center;font-size:0.85rem;transition:border-color 0.3s;box-sizing:border-box;">`;
+  valueTd.style.cssText = 'padding:0.8rem 0.4rem;text-align:center;';
+  
+  const pointsTd = document.createElement('td');
+  pointsTd.className = 'course-point';
+  pointsTd.style.cssText = 'padding:0.8rem 0.4rem;text-align:center;color:#1976d2;font-weight:600;font-size:0.85rem;display:none;width:90px;';
+  pointsTd.textContent = '0.000';
+  
+  const removeTd = document.createElement('td');
+  removeTd.innerHTML = `<button type="button" class="remove-course" style="padding:0.5rem 0.6rem;background:#ffebee;color:#d32f2f;border:1px solid #ffcdd2;border-radius:6px;cursor:pointer;font-size:0.75rem;font-weight:500;transition:all 0.2s;white-space:nowrap;">حذف</button>`;
+  removeTd.style.cssText = 'padding:0.8rem 0.4rem;text-align:center;';
+  
+  tr.appendChild(creditTd);
+  tr.appendChild(valueTd);
+  tr.appendChild(pointsTd);
+  tr.appendChild(removeTd);
+  return tr;
+}  function truncateTo(num, digits) {
     const factor = Math.pow(10, digits);
     return Math.floor(num * factor) / factor;
   }

@@ -490,3 +490,14 @@ section.content-section .section-text {
         padding: 1.8rem;
     }
 }
+
+/* Show النقطة column on tablet and larger (768px and up) */
+@media (min-width: 768px) {
+    .course-point {
+        display: table-cell !important;
+    }
+    
+    .point-col-header {
+        display: table-cell !important;
+    }
+}
