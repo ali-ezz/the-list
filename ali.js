@@ -103,10 +103,10 @@
     tr.style.transition = 'background-color 0.2s';
     tr.style.background = 'white';
     tr.innerHTML = `
-      <td style="padding:0.8rem;text-align:center;"><input class="course-credit" type="text" inputmode="decimal" value="${credit}" style="width:90%;padding:0.5rem;border:2px solid #bbdefb;border-radius:5px;text-align:center;font-size:0.95rem;transition:border-color 0.3s;" /></td>
-      <td style="padding:0.8rem;text-align:center;"><input class="course-value" type="text" inputmode="decimal" value="${value}" style="width:90%;padding:0.5rem;border:2px solid #bbdefb;border-radius:5px;text-align:center;font-size:0.95rem;transition:border-color 0.3s;" /></td>
-      <td class="course-point" style="padding:0.8rem;text-align:center;color:#1976d2;font-weight:600;font-size:0.95rem;">-</td>
-      <td style="padding:0.8rem;text-align:center;"><button type="button" class="remove-course" style="padding:0.4rem 0.8rem;background:#ffebee;color:#d32f2f;border:1px solid #ffcdd2;border-radius:5px;cursor:pointer;font-size:0.85rem;font-weight:500;transition:all 0.2s;">حذف</button></td>
+      <td style="padding:1.2rem 0.8rem;text-align:center;"><input class="course-credit" type="text" inputmode="decimal" value="${credit}" style="width:90%;padding:0.7rem;border:2px solid #bbdefb;border-radius:6px;text-align:center;font-size:0.95rem;transition:border-color 0.3s;box-sizing:border-box;" /></td>
+      <td style="padding:1.2rem 0.8rem;text-align:center;"><input class="course-value" type="text" inputmode="decimal" value="${value}" style="width:90%;padding:0.7rem;border:2px solid #bbdefb;border-radius:6px;text-align:center;font-size:0.95rem;transition:border-color 0.3s;box-sizing:border-box;" /></td>
+      <td class="course-point" style="padding:1.2rem 0.8rem;text-align:center;color:#1976d2;font-weight:600;font-size:0.95rem;">-</td>
+      <td style="padding:1.2rem 0.8rem;text-align:center;"><button type="button" class="remove-course" style="padding:0.5rem 0.9rem;background:#ffebee;color:#d32f2f;border:1px solid #ffcdd2;border-radius:6px;cursor:pointer;font-size:0.85rem;font-weight:500;transition:all 0.2s;white-space:nowrap;">حذف</button></td>
     `;
     
     // Add hover effect
