@@ -26,43 +26,43 @@
 
       <!-- Previous GPA Card -->
       <div style="background:linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);padding:2rem;margin:1.5rem 0;border-radius:12px;border:2px solid #2196f3;box-shadow:0 4px 12px rgba(33,150,243,0.15);transition:all 0.3s ease;">
-        <div style="display:flex;align-items:center;margin-bottom:1.5rem;">
+        <div style="display:flex;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:0.5rem;">
           <div style="width:5px;height:28px;background:linear-gradient(to bottom, #2196f3, #1976d2);margin-left:0.8rem;border-radius:3px;"></div>
           <h3 style="margin:0;font-size:1.15rem;color:#1565c0;font-weight:700;letter-spacing:0.3px;">المعدل التراكمي السابق (اختياري)</h3>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem;">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;">
           <div>
-            <label for="old-gpa" style="display:block;margin-bottom:0.6rem;font-size:0.95rem;color:#1565c0;font-weight:600;">المعدل السابق</label>
-            <input type="text" inputmode="decimal" id="old-gpa" placeholder="0.00 - 4.00" style="width:100%;padding:0.85rem;border:2px solid #bbdefb;border-radius:8px;font-size:1rem;transition:all 0.3s;background:white;box-shadow:0 2px 4px rgba(33,150,243,0.1);" />
+            <label for="old-gpa" style="display:block;margin-bottom:0.6rem;font-size:0.9rem;color:#1565c0;font-weight:600;">المعدل السابق</label>
+            <input type="text" inputmode="decimal" id="old-gpa" placeholder="0.00 - 4.00" style="width:100%;padding:0.75rem;border:2px solid #bbdefb;border-radius:8px;font-size:0.95rem;transition:all 0.3s;background:white;box-shadow:0 2px 4px rgba(33,150,243,0.1);box-sizing:border-box;" />
           </div>
           <div>
-            <label for="old-hours" style="display:block;margin-bottom:0.6rem;font-size:0.95rem;color:#1565c0;font-weight:600;">الساعات المكتسبة</label>
-            <input type="text" inputmode="decimal" id="old-hours" placeholder="عدد الساعات" style="width:100%;padding:0.85rem;border:2px solid #bbdefb;border-radius:8px;font-size:1rem;transition:all 0.3s;background:white;box-shadow:0 2px 4px rgba(33,150,243,0.1);" />
+            <label for="old-hours" style="display:block;margin-bottom:0.6rem;font-size:0.9rem;color:#1565c0;font-weight:600;">الساعات المكتسبة</label>
+            <input type="text" inputmode="decimal" id="old-hours" placeholder="عدد الساعات" style="width:100%;padding:0.75rem;border:2px solid #bbdefb;border-radius:8px;font-size:0.95rem;transition:all 0.3s;background:white;box-shadow:0 2px 4px rgba(33,150,243,0.1);box-sizing:border-box;" />
           </div>
         </div>
       </div>
 
       <!-- Courses Table Card -->
-      <div style="background:linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);padding:2rem;margin:1.5rem 0;border-radius:12px;border:2px solid #2196f3;box-shadow:0 4px 12px rgba(33,150,243,0.15);transition:all 0.3s ease;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:1rem;">
-          <div style="display:flex;align-items:center;">
+      <div style="background:linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);padding:2rem;margin:1.5rem 0;border-radius:12px;border:2px solid #2196f3;box-shadow:0 4px 12px rgba(33,150,243,0.15);transition:all 0.3s ease;overflow-x:auto;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:0.8rem;">
+          <div style="display:flex;align-items:center;min-width:200px;">
             <div style="width:5px;height:28px;background:linear-gradient(to bottom, #2196f3, #1976d2);margin-left:0.8rem;border-radius:3px;"></div>
             <h3 style="margin:0;font-size:1.15rem;color:#1565c0;font-weight:700;letter-spacing:0.3px;">المواد الدراسية</h3>
           </div>
-          <div style="display:flex;gap:0.7rem;">
-            <button id="add-course" type="button" style="padding:0.7rem 1.3rem;background:linear-gradient(135deg, #2196f3, #1976d2);color:white;border:none;border-radius:8px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.3s;box-shadow:0 2px 6px rgba(33,150,243,0.25);">➕ أضف مقرر</button>
-            <button id="clear-courses" type="button" style="padding:0.7rem 1.3rem;background:#f0f0f0;color:#333;border:2px solid #ddd;border-radius:8px;font-size:0.95rem;font-weight:600;cursor:pointer;transition:all 0.3s;">🗑️ مسح</button>
+          <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+            <button id="add-course" type="button" style="padding:0.6rem 1rem;background:linear-gradient(135deg, #2196f3, #1976d2);color:white;border:none;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.3s;box-shadow:0 2px 6px rgba(33,150,243,0.25);white-space:nowrap;">➕ أضف مقرر</button>
+            <button id="clear-courses" type="button" style="padding:0.6rem 1rem;background:#f0f0f0;color:#333;border:2px solid #ddd;border-radius:8px;font-size:0.9rem;font-weight:600;cursor:pointer;transition:all 0.3s;white-space:nowrap;">🗑️ مسح</button>
           </div>
         </div>
         
-        <div style="overflow:auto;border-radius:8px;">
-          <table id="cgpa-courses" style="width:100%;border-collapse:collapse;">
+        <div style="overflow-x:auto;border-radius:8px;-webkit-overflow-scrolling:touch;">
+          <table id="cgpa-courses" style="width:100%;border-collapse:collapse;min-width:450px;">
             <thead>
-              <tr style="background:linear-gradient(to bottom, #c7c7c7, #1976d2);box-shadow:0 2px 4px rgba(33,150,243,0.2);">
-                <th style="padding:1rem;color:#ffffff;text-align:center;font-weight:700;font-size:0.95rem;letter-spacing:0.5px;border-left:1px solid rgba(255,255,255,0.2);">الساعات</th>
-                <th style="padding:1rem;color:#ffffff;text-align:center;font-weight:700;font-size:0.95rem;letter-spacing:0.5px;border-left:1px solid rgba(255,255,255,0.2);">النسبة % أو النقطة</th>
-                <th style="padding:1rem;color:#ffffff;text-align:center;font-weight:700;font-size:0.95rem;letter-spacing:0.5px;border-left:1px solid rgba(255,255,255,0.2);">نقطة المقرر</th>
-                <th style="padding:1rem;color:#ffffff;text-align:center;font-weight:700;font-size:0.95rem;letter-spacing:0.5px;">إجراء</th>
+              <tr style="background:linear-gradient(to bottom, #90caf9, #1976d2);box-shadow:0 2px 4px rgba(33,150,243,0.2);">
+                <th style="padding:0.9rem 0.6rem;color:#ffffff;text-align:center;font-weight:700;font-size:0.9rem;letter-spacing:0.3px;border-left:1px solid rgba(255,255,255,0.2);white-space:nowrap;">الساعات</th>
+                <th style="padding:0.9rem 0.6rem;color:#ffffff;text-align:center;font-weight:700;font-size:0.9rem;letter-spacing:0.3px;border-left:1px solid rgba(255,255,255,0.2);white-space:nowrap;">النسبة % أو النقطة</th>
+                <th style="padding:0.9rem 0.6rem;color:#ffffff;text-align:center;font-weight:700;font-size:0.9rem;letter-spacing:0.3px;border-left:1px solid rgba(255,255,255,0.2);white-space:nowrap;">نقطة المقرر</th>
+                <th style="padding:0.9rem 0.6rem;color:#ffffff;text-align:center;font-weight:700;font-size:0.9rem;letter-spacing:0.3px;white-space:nowrap;">إجراء</th>
               </tr>
             </thead>
             <tbody style="background:white;"></tbody>
@@ -71,34 +71,34 @@
       </div>
 
       <!-- Combined Results Section -->
-      <div style="margin-top:2rem;background:linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);padding:2.5rem;border-radius:12px;border:2px solid #2196f3;box-shadow:0 4px 12px rgba(33,150,243,0.15);transition:all 0.3s ease;">
-        <div style="display:flex;align-items:center;margin-bottom:2rem;">
+      <div style="margin-top:2rem;background:linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);padding:2rem;border-radius:12px;border:2px solid #2196f3;box-shadow:0 4px 12px rgba(33,150,243,0.15);transition:all 0.3s ease;">
+        <div style="display:flex;align-items:center;margin-bottom:1.5rem;flex-wrap:wrap;gap:0.5rem;">
           <div style="width:5px;height:28px;background:linear-gradient(to bottom, #2196f3, #1976d2);margin-left:0.8rem;border-radius:3px;"></div>
           <h3 style="margin:0;font-size:1.15rem;color:#1565c0;font-weight:700;letter-spacing:0.3px;">النتائج</h3>
         </div>
 
         <!-- Semester GPA Display -->
-        <div id="semester-container" style="margin-bottom:2rem;">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:1rem;">
-            <div>
-              <div style="font-size:0.95rem;color:#1565c0;font-weight:600;margin-bottom:0.5rem;">معدل الفصل الحالي</div>
-              <div style="font-size:2.5rem;font-weight:800;color:#1976d2;letter-spacing:-0.5px;" id="semester-gpa-result">-</div>
+        <div id="semester-container" style="margin-bottom:1.5rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:0.8rem;">
+            <div style="flex:1;min-width:150px;">
+              <div style="font-size:0.9rem;color:#1565c0;font-weight:600;margin-bottom:0.4rem;">معدل الفصل الحالي</div>
+              <div style="font-size:2.2rem;font-weight:800;color:#1976d2;letter-spacing:-0.5px;" id="semester-gpa-result">-</div>
             </div>
-            <div id="semester-classification" style="font-size:1.1rem;"></div>
+            <div id="semester-classification" style="font-size:1rem;min-width:120px;"></div>
           </div>
-          <div id="semester-detail" style="font-size:0.85rem;color:#546e7a;line-height:1.6;"></div>
+          <div id="semester-detail" style="font-size:0.8rem;color:#546e7a;line-height:1.5;word-break:break-word;"></div>
         </div>
 
         <!-- Cumulative GPA Display (with divider when shown) -->
-        <div id="cumulative-section" style="display:none;padding-top:2rem;border-top:2px solid #bbdefb;">
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:1rem;">
-            <div>
-              <div style="font-size:0.95rem;color:#1565c0;font-weight:600;margin-bottom:0.5rem;">المعدل التراكمي الجديد</div>
-              <div style="font-size:2.5rem;font-weight:800;color:#1976d2;letter-spacing:-0.5px;" id="cgpa-result">-</div>
+        <div id="cumulative-section" style="display:none;padding-top:1.5rem;border-top:2px solid #bbdefb;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:0.8rem;margin-top:1rem;">
+            <div style="flex:1;min-width:150px;">
+              <div style="font-size:0.9rem;color:#1565c0;font-weight:600;margin-bottom:0.4rem;">المعدل التراكمي الجديد</div>
+              <div style="font-size:2.2rem;font-weight:800;color:#1976d2;letter-spacing:-0.5px;" id="cgpa-result">-</div>
             </div>
-            <div id="cumulative-classification" style="font-size:1.1rem;"></div>
+            <div id="cumulative-classification" style="font-size:1rem;min-width:120px;"></div>
           </div>
-          <div id="cgpa-detail" style="font-size:0.85rem;color:#546e7a;line-height:1.6;"></div>
+          <div id="cgpa-detail" style="font-size:0.8rem;color:#546e7a;line-height:1.5;word-break:break-word;"></div>
         </div>
       </div>
     </section>

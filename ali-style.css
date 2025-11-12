@@ -312,4 +312,181 @@ section.content-section .section-text {
         font-size: 0.98rem;
         padding: 0.3rem 0.5rem;
     }
+
+    /* Header responsive */
+    header.header-section {
+        padding: 2rem 1rem;
+        margin-bottom: 1rem;
+    }
+
+    header.header-section .main-title {
+        font-size: 2rem;
+        margin-bottom: 0.6rem;
+    }
+
+    header.header-section .header-author-link {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+    }
+
+    /* Main container responsive */
+    main.content-container {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    section.content-section {
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
+
+    section.content-section .section-title {
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+    }
+
+    /* CGPA Section responsive */
+    #cgpa-section {
+        padding: 1.2rem !important;
+    }
+
+    /* Previous GPA Card */
+    #cgpa-section > div:first-of-type {
+        padding: 1.5rem !important;
+        margin: 1rem 0 !important;
+    }
+
+    #cgpa-section > div:first-of-type h3 {
+        font-size: 1rem !important;
+    }
+
+    #cgpa-section > div:first-of-type input {
+        padding: 0.7rem !important;
+        font-size: 0.9rem !important;
+    }
+
+    /* Courses Table Card */
+    #cgpa-section > div:nth-of-type(2) {
+        padding: 1.2rem !important;
+        margin: 1rem 0 !important;
+    }
+
+    #cgpa-section > div:nth-of-type(2) h3 {
+        font-size: 1rem !important;
+    }
+
+    /* Table buttons responsive */
+    #add-course, #clear-courses {
+        padding: 0.6rem 1rem !important;
+        font-size: 0.85rem !important;
+        flex: 1;
+        min-width: 100px;
+    }
+
+    /* Table header and cells */
+    #cgpa-courses thead tr {
+        background: linear-gradient(to bottom, #90caf9, #1976d2) !important;
+    }
+
+    #cgpa-courses th {
+        padding: 0.8rem !important;
+        font-size: 0.8rem !important;
+        font-weight: 600 !important;
+    }
+
+    #cgpa-courses td {
+        padding: 0.7rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    #cgpa-courses input {
+        padding: 0.6rem !important;
+        font-size: 0.85rem !important;
+    }
+
+    .remove-course {
+        padding: 0.4rem 0.6rem !important;
+        font-size: 0.75rem !important;
+    }
+
+    /* Results Section responsive */
+    #cgpa-section > div:last-of-type {
+        padding: 1.5rem !important;
+        margin-top: 1.5rem !important;
+    }
+
+    #cgpa-section > div:last-of-type > div:first-child {
+        margin-bottom: 1.5rem !important;
+    }
+
+    #cgpa-section > div:last-of-type h3 {
+        font-size: 1rem !important;
+    }
+
+    /* GPA Results Display */
+    [id="semester-gpa-result"], [id="cgpa-result"] {
+        font-size: 2rem !important;
+    }
+
+    [id="semester-detail"], [id="cgpa-detail"] {
+        font-size: 0.8rem !important;
+        line-height: 1.5;
+    }
+
+    /* Classification badges responsive */
+    [id="semester-classification"], [id="cumulative-classification"] {
+        font-size: 0.95rem !important;
+    }
+
+    /* Divider line spacing */
+    #cumulative-section {
+        padding-top: 1.5rem !important;
+    }
+}
+
+/* Tablet and medium devices */
+@media (max-width: 768px) {
+    header.header-section {
+        padding: 2.5rem 1rem;
+    }
+
+    header.header-section .main-title {
+        font-size: 2.2rem;
+    }
+
+    main.content-container {
+        width: 95%;
+    }
+
+    section.content-section {
+        padding: 1.5rem;
+        margin: 1.2rem 0;
+    }
+
+    /* CGPA inputs grid */
+    #cgpa-section > div:first-of-type > div:last-child {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+
+    /* Button group responsive */
+    #cgpa-section > div:nth-of-type(2) > div:first-child {
+        flex-direction: column !important;
+        gap: 0.8rem !important;
+    }
+
+    #add-course, #clear-courses {
+        width: 100% !important;
+    }
+}
+
+/* Large devices fix */
+@media (max-width: 992px) {
+    main.content-container {
+        width: 92%;
+    }
+
+    section.content-section {
+        padding: 1.8rem;
+    }
 }
