@@ -2,6 +2,18 @@
 // Shows exact CGPA (3 decimals) and final CGPA truncated to 2 decimals (no rounding up).
 
 (function () {
+  // Helper function to escape HTML special characters
+  function escapeHtml(text) {
+    const map = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, m => map[m]);
+  }
+
   // grade mapping from percentage to grade point
   function percentToPoint(p) {
     if (p === null || isNaN(p)) return 0;
@@ -32,29 +44,38 @@
 
   function getClassificationBadge(gpa) {
     const classification = classifyCGPA(gpa);
-    let bgColor, textColor;
+    let bgColor, textColor, message;
     
     if (gpa >= 3.5) {
       bgColor = '#4caf50'; // green
       textColor = 'white';
+      message = 'استمر هكذا 🌟';
     } else if (gpa >= 3.0) {
       bgColor = '#2196f3'; // blue
       textColor = 'white';
+      message = 'تسير بشكل رائع 👏';
     } else if (gpa >= 2.5) {
       bgColor = '#ff9800'; // orange
       textColor = 'white';
+      message = 'حسن جداً 💪';
     } else if (gpa >= 2.0) {
       bgColor = '#ffc107'; // amber
       textColor = '#333';
+      message = 'ركز أكثر 📚';
     } else if (gpa >= 1.0) {
       bgColor = '#f44336'; // red
       textColor = 'white';
+      message = 'اطلب مساعدة ⚠️';
     } else {
       bgColor = '#9e9e9e'; // grey
       textColor = 'white';
+      message = 'استشر معلمك ❌';
     }
     
-    return `<span style="display:inline-block;padding:0.3rem 0.8rem;background:${bgColor};color:${textColor};border-radius:20px;font-size:0.9rem;font-weight:bold;margin-right:0.5rem;">${classification}</span>`;
+    return `<div style="display:flex;flex-direction:column;gap:0.5rem;">
+      <span style="display:inline-block;padding:0.3rem 0.8rem;background:${bgColor};color:${textColor};border-radius:20px;font-size:0.9rem;font-weight:bold;">${classification}</span>
+      <span style="font-size:0.8rem;color:#666;font-weight:500;">${message}</span>
+    </div>`;
   }
 
   // Validate and sanitize numeric input (English numbers only)
@@ -191,7 +212,24 @@ function createRow(credit = '', value = '') {
     
     semesterGpaEl.textContent = semesterGpaTrunc2.toFixed(2);
     semesterClassificationEl.innerHTML = getClassificationBadge(semesterGpaTrunc2);
-    semesterDetailEl.textContent = `دقيق: ${semesterGpaExact.toFixed(3)} — مجموع النقاط: ${sumWeighted.toFixed(3)} ، مجموع الساعات: ${sumCredits.toFixed(1)}`;
+    
+    let semesterWisdom = '';
+    if (semesterGpaTrunc2 >= 3.5) {
+      semesterWisdom = '"أنت نجم حقاً، احتفل بنجاحك!"';
+    } else if (semesterGpaTrunc2 >= 3.0) {
+      semesterWisdom = '"عمل رائع، أنت على الطريق الصحيح!"';
+    } else if (semesterGpaTrunc2 >= 2.5) {
+      semesterWisdom = '"اكمل، يمكنك فعل ذلك!"';
+    } else if (semesterGpaTrunc2 >= 2.0) {
+      semesterWisdom = '"تقدم جيد، استمر بالاجتهاد!"';
+    } else if (semesterGpaTrunc2 >= 1.0) {
+      semesterWisdom = '"لا تستسلم، الغد فرصة جديدة!"';
+    } else {
+      semesterWisdom = '"كل البدايات صعبة، ستنجح قريباً!"';
+    }
+    
+    semesterDetailEl.innerHTML = `<div style="margin-bottom:0.8rem;">${escapeHtml(`دقيق: ${semesterGpaExact.toFixed(3)} — مجموع النقاط: ${sumWeighted.toFixed(3)} ، مجموع الساعات: ${sumCredits.toFixed(1)}`)}</div>
+    <div style="font-size:0.8rem;color:#1976d2;font-style:italic;font-weight:500;background:#e3f2fd;padding:0.8rem;border-radius:6px;border-right:3px solid #2196f3;">${semesterWisdom}</div>`;
 
     // Calculate cumulative GPA if old GPA and hours are provided
     if (oldGPA > 0 && oldHours > 0) {
@@ -204,7 +242,24 @@ function createRow(credit = '', value = '') {
       
       cgpaResultEl.textContent = cumulativeGpaTrunc2.toFixed(2);
       cumulativeClassificationEl.innerHTML = getClassificationBadge(cumulativeGpaTrunc2);
-      cgpaDetailEl.textContent = `دقيق: ${cumulativeGpaExact.toFixed(3)} — مجموع النقاط الكلي: ${totalWeightedPoints.toFixed(3)} ، مجموع الساعات الكلي: ${totalHours.toFixed(1)}`;
+      
+      let cumulativeWisdom = '';
+      if (cumulativeGpaTrunc2 >= 3.5) {
+        cumulativeWisdom = '"متميز جداً، أنت مثال للنجاح!"';
+      } else if (cumulativeGpaTrunc2 >= 3.0) {
+        cumulativeWisdom = '"أداء ممتاز، استمر بهذا الزخم!"';
+      } else if (cumulativeGpaTrunc2 >= 2.5) {
+        cumulativeWisdom = '"تقدم مستمر، أنت تحسن نفسك!"';
+      } else if (cumulativeGpaTrunc2 >= 2.0) {
+        cumulativeWisdom = '"خطوات صحيحة، لا تيأس الآن!"';
+      } else if (cumulativeGpaTrunc2 >= 1.0) {
+        cumulativeWisdom = '"الصعوبة مؤقتة، قوتك دائمة!"';
+      } else {
+        cumulativeWisdom = '"ابدأ من جديد، كل خطأ درس!"';
+      }
+      
+      cgpaDetailEl.innerHTML = `<div style="margin-bottom:0.8rem;">${escapeHtml(`دقيق: ${cumulativeGpaExact.toFixed(3)} — مجموع النقاط الكلي: ${totalWeightedPoints.toFixed(3)} ، مجموع الساعات الكلي: ${totalHours.toFixed(1)}`)}</div>
+      <div style="font-size:0.8rem;color:#1976d2;font-style:italic;font-weight:500;background:#e3f2fd;padding:0.8rem;border-radius:6px;border-right:3px solid #2196f3;">${cumulativeWisdom}</div>`;
       cumulativeSection.style.display = 'block';
     } else {
       cumulativeSection.style.display = 'none';
