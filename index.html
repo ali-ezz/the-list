@@ -13,6 +13,7 @@
   <!-- Main Title / Header -->
   <header class="header-section">
     <h1 class="main-title">اللائحة الجامعيه</h1>
+    <a href="https://ali-ezz-portfolio.vercel.app" target="_blank" class="header-author-link">by ali ezz</a>
   </header>
 
   <!-- Container for all sections -->
@@ -69,36 +70,35 @@
         </div>
       </div>
 
-      <!-- Results Section -->
-      <div style="margin-top:2rem;">
-        <!-- Semester GPA -->
-        <div style="background:linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);padding:2rem;border-radius:12px;border:2px solid #2196f3;margin-bottom:1.5rem;box-shadow:0 4px 12px rgba(33,150,243,0.15);transition:all 0.3s ease;">
-          <div style="display:flex;align-items:center;margin-bottom:1.5rem;">
-            <div style="width:5px;height:28px;background:linear-gradient(to bottom, #2196f3, #1976d2);margin-left:0.8rem;border-radius:3px;"></div>
-            <h3 style="margin:0;font-size:1.15rem;color:#1565c0;font-weight:700;letter-spacing:0.3px;">معدل الفصل الحالي</h3>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
+      <!-- Combined Results Section -->
+      <div style="margin-top:2rem;background:linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);padding:2.5rem;border-radius:12px;border:2px solid #2196f3;box-shadow:0 4px 12px rgba(33,150,243,0.15);transition:all 0.3s ease;">
+        <div style="display:flex;align-items:center;margin-bottom:2rem;">
+          <div style="width:5px;height:28px;background:linear-gradient(to bottom, #2196f3, #1976d2);margin-left:0.8rem;border-radius:3px;"></div>
+          <h3 style="margin:0;font-size:1.15rem;color:#1565c0;font-weight:700;letter-spacing:0.3px;">النتائج</h3>
+        </div>
+
+        <!-- Semester GPA Display -->
+        <div id="semester-container" style="margin-bottom:2rem;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:1rem;">
             <div>
+              <div style="font-size:0.95rem;color:#1565c0;font-weight:600;margin-bottom:0.5rem;">معدل الفصل الحالي</div>
               <div style="font-size:2.5rem;font-weight:800;color:#1976d2;letter-spacing:-0.5px;" id="semester-gpa-result">-</div>
             </div>
             <div id="semester-classification" style="font-size:1.1rem;"></div>
           </div>
-          <div id="semester-detail" style="margin-top:1rem;padding-top:1rem;border-top:2px solid #bbdefb;font-size:0.9rem;color:#546e7a;line-height:1.6;"></div>
+          <div id="semester-detail" style="font-size:0.85rem;color:#546e7a;line-height:1.6;"></div>
         </div>
 
-        <!-- Cumulative GPA -->
-        <div id="cumulative-section" style="display:none;background:linear-gradient(135deg, #e3f2fd 0%, #ffffff 100%);padding:2rem;border-radius:12px;border:2px solid #2196f3;box-shadow:0 4px 12px rgba(33,150,243,0.15);transition:all 0.3s ease;">
-          <div style="display:flex;align-items:center;margin-bottom:1.5rem;">
-            <div style="width:5px;height:28px;background:linear-gradient(to bottom, #2196f3, #1976d2);margin-left:0.8rem;border-radius:3px;"></div>
-            <h3 style="margin:0;font-size:1.15rem;color:#1565c0;font-weight:700;letter-spacing:0.3px;">المعدل التراكمي الجديد</h3>
-          </div>
-          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;">
+        <!-- Cumulative GPA Display (with divider when shown) -->
+        <div id="cumulative-section" style="display:none;padding-top:2rem;border-top:2px solid #bbdefb;">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:1rem;">
             <div>
-              <div style="font-size:3rem;font-weight:800;color:#1976d2;letter-spacing:-0.5px;" id="cgpa-result">-</div>
+              <div style="font-size:0.95rem;color:#1565c0;font-weight:600;margin-bottom:0.5rem;">المعدل التراكمي الجديد</div>
+              <div style="font-size:2.5rem;font-weight:800;color:#1976d2;letter-spacing:-0.5px;" id="cgpa-result">-</div>
             </div>
-            <div id="cumulative-classification" style="font-size:1.2rem;"></div>
+            <div id="cumulative-classification" style="font-size:1.1rem;"></div>
           </div>
-          <div id="cgpa-detail" style="margin-top:1rem;padding-top:1rem;border-top:2px solid #bbdefb;font-size:0.9rem;color:#546e7a;line-height:1.6;"></div>
+          <div id="cgpa-detail" style="font-size:0.85rem;color:#546e7a;line-height:1.6;"></div>
         </div>
       </div>
     </section>

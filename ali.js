@@ -70,12 +70,15 @@
       value = parts[0] + '.' + parts.slice(1).join('');
     }
     
-    // Convert to number and validate range
+    // Validate range if value is provided
     let numValue = parseFloat(value);
-    if (!isNaN(numValue)) {
-      if (min !== null && numValue < min) numValue = min;
-      if (max !== null && numValue > max) numValue = max;
-      value = numValue.toString();
+    if (!isNaN(numValue) && value !== '' && value !== '.') {
+      if (min !== null && numValue < min) {
+        value = min.toString();
+      }
+      if (max !== null && numValue > max) {
+        value = max.toString();
+      }
     }
     
     input.value = value;
